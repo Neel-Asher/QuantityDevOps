@@ -1,0 +1,724 @@
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1013-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu May 21 05:42:32 UTC 2026
+
+  System load:  0.16               Temperature:           -273.1 C
+  Usage of /:   29.4% of 13.49GB   Processes:             116
+  Memory usage: 62%                Users logged in:       0
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.38.32
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+12 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+Last login: Thu May 21 05:39:45 2026 from 13.233.177.5
+ubuntu@ip-172-31-38-32:~$ whoami
+ubuntu
+ubuntu@ip-172-31-38-32:~$ pwd
+/home/ubuntu
+ubuntu@ip-172-31-38-32:~$ hostname
+ip-172-31-38-32
+ubuntu@ip-172-31-38-32:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 02:88:25:8f:66:63 brd ff:ff:ff:ff:ff:ff
+    inet 172.31.38.32/20 metric 100 brd 172.31.47.255 scope global dynamic ens5
+       valid_lft 2947sec preferred_lft 2947sec
+    inet6 fe80::88:25ff:fe8f:6663/64 scope link 
+       valid_lft forever preferred_lft forever
+ubuntu@ip-172-31-38-32:~$ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/root         14G  4.0G  9.6G  30% /
+tmpfs            456M     0  456M   0% /dev/shm
+tmpfs            183M  912K  182M   1% /run
+tmpfs            5.0M     0  5.0M   0% /run/lock
+efivarfs         128K  3.3K  120K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p16  881M  162M  657M  20% /boot
+/dev/nvme0n1p15  105M  6.2M   99M   6% /boot/efi
+tmpfs             92M   16K   92M   1% /run/user/1000
+ubuntu@ip-172-31-38-32:~$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             911         709          91           2         270         201
+Swap:              0           0           0
+ubuntu@ip-172-31-38-32:~$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@ip-172-31-38-32:~$ uname -a
+Linux ip-172-31-38-32 6.17.0-1013-aws #13~24.04.1-Ubuntu SMP Fri Apr 24 21:50:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@ip-172-31-38-32:~$ java -version
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+ubuntu@ip-172-31-38-32:~$ mvn -version
+Apache Maven 3.8.7
+Maven home: /usr/share/maven
+Java version: 21.0.10, vendor: Ubuntu, runtime: /usr/lib/jvm/java-21-openjdk-amd64
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "6.17.0-1013-aws", arch: "amd64", family: "unix"
+ubuntu@ip-172-31-38-32:~$ git --version
+git version 2.43.0
+ubuntu@ip-172-31-38-32:~$ system status springboot
+Command 'system' not found, did you mean:
+  command 'systemd' from deb systemd (255.4-1ubuntu8.15)
+  command 'system3' from deb simh (3.8.1-6.1)
+Try: sudo apt install <deb name>
+ubuntu@ip-172-31-38-32:~$ sudo systemctl status springboot
+Unit springboot.service could not be found.
+ubuntu@ip-172-31-38-32:~$ ls
+hello.txt  main.java
+ubuntu@ip-172-31-38-32:~$ ps -ef | grep java
+ubuntu     33451   33364  0 05:45 pts/0    00:00:00 grep --color=auto java
+ubuntu@ip-172-31-38-32:~$ sudo lsof -i :8080
+ubuntu@ip-172-31-38-32:~$ cd /
+ubuntu@ip-172-31-38-32:/$ ls
+app  bin.usr-is-merged  dev  home  lib.usr-is-merged  lost+found  mnt  proc  run   sbin.usr-is-merged  srv  tmp  var
+bin  boot               etc  lib   lib64              media       opt  root  sbin  snap                sys  usr
+ubuntu@ip-172-31-38-32:/$ cd app
+ubuntu@ip-172-31-38-32:/app$ ls
+QuantityMeasurementApp  README.md  target
+ubuntu@ip-172-31-38-32:/app$ cd /app/QuantityMeasurementApp
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ ls
+app.login  app.login.2026-05-13.0.gz  mvnw  mvnw.cmd  pom.xml  src  target
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ ls src
+main  test
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ ls target
+classes                 maven-archiver                               quantity-measurement-app-0.0.1-SNAPSHOT.jar.original
+generated-sources       maven-status                                 test-classes
+generated-test-sources  quantity-measurement-app-0.0.1-SNAPSHOT.jar
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ cat pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/>
+  </parent>
+  
+  <groupId>com.app</groupId>
+  <artifactId>quantity-measurement-app</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>QuantityMeasurementApp</name>
+
+  <properties>
+    <java.version>21</java.version>
+    <lombok.version>1.18.26</lombok.version>
+  </properties>
+
+  <dependencies>
+
+    <!-- Web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- H2 (correct dependency) -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- MySQL -->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Swagger -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId> 
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- DevTools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Tests -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <scope>test</scope>
+</dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <release>${java.version}</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin> 
+      <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+  </build>
+
+</project>
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ find . -name "*.jar"
+./target/quantity-measurement-app-0.0.1-SNAPSHOT.jar
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ sudo du -sh /app
+996K    /app
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ sudo journalctl -n 50
+May 21 05:42:26 ip-172-31-38-32 systemd[1]: Removed slice user-1000.slice - User Slice of UID 1000.
+May 21 05:42:26 ip-172-31-38-32 systemd[1]: user-1000.slice: Consumed 4.949s CPU time.
+May 21 05:42:31 ip-172-31-38-32 ec2-instance-connect[33103]: Querying EC2 Instance Connect keys for matching fingerprint: SHA256:GUxxgq0eHy>
+May 21 05:42:31 ip-172-31-38-32 ec2-instance-connect[33135]: Providing ssh key from EC2 Instance Connect with fingerprint: SHA256:GUxxgq0eH>
+May 21 05:42:32 ip-172-31-38-32 ec2-instance-connect[33252]: Querying EC2 Instance Connect keys for matching fingerprint: SHA256:GUxxgq0eHy>
+May 21 05:42:32 ip-172-31-38-32 ec2-instance-connect[33284]: Providing ssh key from EC2 Instance Connect with fingerprint: SHA256:GUxxgq0eH>
+May 21 05:42:32 ip-172-31-38-32 sshd[32994]: Accepted publickey for ubuntu from 13.233.177.5 port 6145 ssh2: ED25519 SHA256:GUxxgq0eHyo/+HC>
+May 21 05:42:32 ip-172-31-38-32 sshd[32994]: pam_unix(sshd:session): session opened for user ubuntu(uid=1000) by ubuntu(uid=0)
+May 21 05:42:32 ip-172-31-38-32 systemd[1]: Created slice user-1000.slice - User Slice of UID 1000.
+May 21 05:42:32 ip-172-31-38-32 systemd[1]: Starting user-runtime-dir@1000.service - User Runtime Directory /run/user/1000...
+May 21 05:42:32 ip-172-31-38-32 systemd-logind[541]: New session 1209 of user ubuntu.
+May 21 05:42:32 ip-172-31-38-32 systemd[1]: Finished user-runtime-dir@1000.service - User Runtime Directory /run/user/1000.
+May 21 05:42:32 ip-172-31-38-32 systemd[1]: Starting user@1000.service - User Manager for UID 1000...
+May 21 05:42:32 ip-172-31-38-32 (systemd)[33297]: pam_unix(systemd-user:session): session opened for user ubuntu(uid=1000) by ubuntu(uid=0)
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Queued start job for default target default.target.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Created slice app.slice - User Application Slice.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Started launchpadlib-cache-clean.timer - Clean up old files in the Launchpadlib cache.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Reached target paths.target - Paths.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Reached target timers.target - Timers.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Starting dbus.socket - D-Bus User Message Bus Socket...
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Listening on dirmngr.socket - GnuPG network certificate management daemon.
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Listening on gpg-agent-browser.socket - GnuPG cryptographic agent and passphrase cache (acc>
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Listening on gpg-agent-extra.socket - GnuPG cryptographic agent and passphrase cache (restr>
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Starting gpg-agent-ssh.socket - GnuPG cryptographic agent (ssh-agent emulation)...
+May 21 05:42:32 ip-172-31-38-32 systemd[33297]: Listening on gpg-agent.socket - GnuPG cryptographic agent and passphrase cache.
+
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ history
+    1  sudo apt pdate
+    2  sudo apt update
+    3  sudo apt install openjdk-17-jdk -y
+    4  java -version
+    5  sudo apt install maven -y
+    6  mvn -version
+    7  sudo apt install git -y
+    8  sudo apt install openjdk-21-jdk -y
+    9  java -version
+   10  sudo git clone https://www.github.com/Neel-Asher/QuantityMeasurementSpringBoot app
+   11  sudo chown -R ubuntu:ubuntu /app
+   12  ls
+   13  sudo chown -R ubuntu:ubuntu app
+   14  mv app/ /app
+   15  sudo mv app/ /app
+   16  cd /
+   17  ls -la app/
+   18  cd app
+   19  ls
+   20  git switch dev
+   21  ls
+   22  cd QuantityMeasurementApp/
+   23  ls
+   24  cd src
+   25  ls
+   26  cd main
+   27  ls
+   28  cd resources
+   29  ls
+   30  nano application.properties 
+   31  cd ..
+   32  ls
+   33  cd ..
+   34  ls
+   35  nano pom.xml
+   36  mvn clean package -DskipTests
+   37  cd target
+   38  ls
+   39  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+   40  java -version
+   41  mvn -version
+   42  ls
+   43  cd /
+   44  ls
+   45  cd app
+   46  ls
+   47  cd QuantityMeasurementApp/
+   48  ls
+   49  cd src
+   50  cd main
+   51  cd resources
+   52  ls
+   53  nano application.properties 
+   54  cd ..
+   55  ls
+   56  mvn clean package -DskipTests
+   57  cd target
+   58  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+   59  cd ..
+   60  nano pom.xml
+   61  cd target
+   62  cd ..
+   63  mvn clean package -DskipTests
+   64  ls
+   65  cd target
+   66  ls
+   67  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+   68  cs ..
+   69  cd ..
+   70  ls
+   71  mvn clean package -DskipTests
+   72  ls
+   73  cd target
+   74  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+   75  cd app
+   76  ls
+   77  cd /
+   78  ls
+   79  cs app
+   80  cd app
+   81  ls
+   82  cd QuantityMeasurementApp/
+   83  ls
+   84  cd src/main/resources
+   85  nano application.properties 
+   86  CD ..
+   87  cd ..
+   88  ls
+   89  mvn clean package -dskipTests
+   90  mvn clean package - DskipTests
+   91  mvn clean package -DskipTests
+   92  cd target
+   93  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+   94  cd /
+   95  cd app
+   96  cd QuantityMeasurementApp/
+   97  mvn clean package -DskipTests
+   98  cd target/
+   99  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  100  cd ..
+  101  cd src
+  102  cd main
+  103  cd resources/
+  104  nano application.properties 
+  105  cd ..
+  106  cd target
+  107  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  108  cd ..
+  109  ls
+  110  cat pom.xml 
+  111  cat src/main/resources/
+  112  cat src/main/resources/application.properties 
+  113  ation.properties 
+  114  nano src/main/resources/application.properties 
+  115  mvn clean package -DskipTests
+  116  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  117  nano src/main/resources/application.properties 
+  118  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  119  mvn clean package -DskipTests
+  120  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  121  cd /app
+  122  ls
+  123  cd QuantityMeasurementApp/
+  124  ls
+  125  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  126  cd /app
+  127  ls
+  128  cd QuantityMeasurementApp/
+  129  ls
+  130  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  131  cd src
+  132  cd main
+  133  cd resources/
+  134  nano application.properties 
+  135  cd ..
+  136  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  137  cd src
+  138  cd main
+  139  ls
+  140  cd resources/
+  141  nano application.properties 
+  142  cd ..
+  143  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  144  nano pom.xml
+  145  nc -zv 172.31.33.159 3306
+  146  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar
+  147  cd src
+  148  cd main
+  149  cd resources/
+  150  nano application.properties 
+  151  nc -zv 172.31.33.159 3306
+  152  nano application.properties 
+  153  cat application.properties 
+  154  mysql -h 172.31.33.159 -u quantityadmin -p
+  155  curl http://169.254.169.254/latest/meta-data/local-ipv4
+  156  nc -zv 172.31.33.159 3306
+  157  mysql -h 172.31.33.159 -u quantityadmin -p
+  158  sudo apt install mysql
+  159  sudo apt install mysql-server
+  160  mysql -h 172.31.33.159 -u quantityadmin -p
+  161  cat application.properties 
+  162  printenv | grep SPRING
+  163  cd ..
+  164  printenv | grep SPRING
+  165  clear
+  166  sudo systemctl -a
+  167  a
+  168  clear
+  169  ls
+  170  cd /app
+  171  ls
+  172  cd QuantityMeasurementApp/
+  173  ls
+  174  sudo mvn clean install -DskipTests
+  175  cd /
+  176  ls
+  177  cd app
+  178  ls
+  179  cd QuantityMeasurementApp/
+  180  ls
+  181  mvn clean packages -DskipTests
+  182  mvn clean package -DskipTests
+  183  clear
+  184  sudo mvn clean package -DskipTests
+  185  ls target
+  186  java --version
+  187  java -jar target/quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  188  clear
+  189  ls /etc/systemd/system | grep quantity
+  190  ls /etc/systemd/system
+  191  sudo vim /etc/systemd/system/quantityapp.service
+  192  sudo systemctl enable --now quantityapp.service
+  193  sudo mkdir -p /etc/quantityapp
+  194  sudo touch /etc/quantityapp/env.conf
+  195  sudo systemctl enable --now quantityapp.service
+  196  sudo systemctl status quantityapp.service
+  197  clear
+  198  cd
+  199  clear
+  200  sudo systemctl -a
+  201  clear
+  202  sudo systemctl -a | grep quantity
+  203  ls /etc/systemd/system | grep quantity
+  204  "siddhi is angry" | grep s
+  205  clear
+  206  cd /app
+  207  cd QuantityMeasurementApp/
+  208  ls
+  209  ls | grep tar
+  210  cd src/main/java/com
+  211  ls
+  212  cd app/quantitymeasurement/
+  213  ls
+  214  ls | grep co
+  215  cd controller
+  216  ls
+  217  cat QuantityMeasurementController.java | grep Get
+  218  cat QuantityMeasurementController.java | grep GetMapping
+  219  whoami
+  220  exit
+  221  cd /
+  222  cd app
+  223  lsa
+  224  ls
+  225  cd QuantityMeasurementApp/
+  226  ls
+  227  cat src/main/resources/application.properties 
+  228  ls -la
+  229  cd .ssh
+  230  nano authorized_keys 
+  231  chmod 600 authorized_keys 
+  232  cd /
+  233  cd app
+  234  ls
+  235  cd QuantityMeasurementApp/
+  236  cd target
+  237  ls
+  238  ls -la
+  239  cd ..
+  240  ls
+  241  cd ..
+  242  ls
+  243  clear
+  244  cat ~/.ssh/authorized_keys 
+  245  clear
+  246  ls
+  247  cat hello.txt
+  248  clear
+  249  ls -la /app/QuantityMeasurementApp/target
+  250  ls
+  251  cd /
+  252  ls
+  253  cd ~
+  254  ls
+  255  cd /
+  256  cd app
+  257  ls
+  258  cd QuantityMeasurementApp/
+  259  cd /
+  260  ls
+  261  cd app
+  262  ls
+  263  cd target
+  264  ls
+  265  cd QuantityMeasurementApp/
+  266  cd target
+  267  ls
+  268  cd /
+  269  ls
+  270  cd app
+  271  ls
+  272  cd QuantityMeasurementApp/
+  273  ls
+  274  cd target
+  275  ls
+  276  cd ..
+  277  cat app.login
+  278  ls
+  279  cd target/
+  280  ls
+  281  java -jar quantity-measurement-app-0.0.1-SNAPSHOT.jar 
+  282  ls
+  283  cd /
+  284  ls
+  285  cd app
+  286  ls
+  287  java --version
+  288  mvn --version
+  289  mvv build package -DskipTests
+  290  mvn build package -DskipTests
+  291  whoami
+  292  pwd
+  293  hostname
+  294  ip a
+  295  df -h
+  296  free -m
+  297  cat /etc/os-release
+  298  uname -a
+  299  java -version
+  300  mvn -version
+  301  git --version
+  302  system status springboot
+  303  sudo systemctl status springboot
+  304  ls
+  305  ps -ef | grep java
+  306  sudo lsof -i :8080
+  307  cd /
+  308  ls
+  309  cd app
+  310  ls
+  311  cd /app/QuantityMeasurementApp
+  312  ls
+  313  ls src
+  314  ls target
+  315  cat pom.xml
+  316  find . -name "*.jar"
+  317  sudo du -sh /app
+  318  sudo journalctl -n 50
+  319  history
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ cat src/main/resources/application.properties
+spring.application.name=QuantityMeasurementApp
+server.port=8081
+
+# Repository Type Configuration either "cache" or "database"
+repository.type=database
+
+# JPA Configuration
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# H2 Database (Development)
+spring.datasource.url=jdbc:mysql://172.31.33.159:3306/quantitydb
+spring.datasource.username=quantityadmin
+spring.datasource.password=Quantity@123
+
+spring.jpa.hibernate.ddl-auto=update
+
+# Connection Pool
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=2
+spring.datasource.hikari.connection-timeout=30000
+
+# Logging Configuration
+logging.level.root=WARN
+logging.level.com.app.quantitymeasurement=DEBUG
+logging.level.org.springframework.web=DEBUG
+logging.level.org.hibernate.SQL=DEBUG
+logging.file.name=app.login
+
+# Custom log pattern for console output to include timestamp, logger name, and message
+# The pattern includes:
+# %d{yyyy-MM-dd HH:mm:ss} - Timestamp in the format of year-month-day hour:minute:second
+# %logger{36} - Logger name truncated to 36 characters
+# %line - Line number where the log statement was issued
+# %msg%n - The log message followed by a new line
+# console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %logger{5}:%line - %msg%n
+
+# Swagger/OpenAPI
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.enabled=true
+
+# Actuator
+management.endpoints.web.exposure.include=health,metrics,info
+management.endpoint.health.show-details=always
+management.endpoint.metrics.enabled=true
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ ls -la target
+total 96
+drwxr-xr-x 8 root   root    4096 May 14 08:29 .
+drwxrwxr-x 5 ubuntu ubuntu  4096 May 14 05:10 ..
+drwxr-xr-x 3 root   root    4096 May 14 05:09 classes
+drwxr-xr-x 3 root   root    4096 May 14 05:09 generated-sources
+drwxr-xr-x 3 root   root    4096 May 14 05:09 generated-test-sources
+drwxr-xr-x 2 root   root    4096 May 14 05:09 maven-archiver
+drwxr-xr-x 3 root   root    4096 May 14 05:09 maven-status
+-rw-r--r-- 1 ubuntu ubuntu 32053 May 14 09:04 quantity-measurement-app-0.0.1-SNAPSHOT.jar
+-rw-r--r-- 1 root   root   32073 May 14 05:09 quantity-measurement-app-0.0.1-SNAPSHOT.jar.original
+drwxr-xr-x 3 root   root    4096 May 14 05:09 test-classes
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ jar tf target/quantity-measurement-app-0.0.1-SNAPSHOT.jar | head -40
+META-INF/
+META-INF/MANIFEST.MF
+com/
+com/app/
+com/app/quantitymeasurement/
+com/app/quantitymeasurement/unit/
+com/app/quantitymeasurement/model/
+com/app/quantitymeasurement/config/
+com/app/quantitymeasurement/service/
+com/app/quantitymeasurement/controller/
+com/app/quantitymeasurement/exception/
+com/app/quantitymeasurement/repository/
+META-INF/maven/
+META-INF/maven/com.app/
+META-INF/maven/com.app/quantity-measurement-app/
+com/app/quantitymeasurement/QuantityMeasurementAppApplication.class
+com/app/quantitymeasurement/unit/Unit.class
+com/app/quantitymeasurement/unit/WeightUnit.class
+com/app/quantitymeasurement/unit/IMeasurable.class
+com/app/quantitymeasurement/unit/Quantity.class
+com/app/quantitymeasurement/unit/TemperatureUnit.class
+com/app/quantitymeasurement/unit/VolumeUnit.class
+com/app/quantitymeasurement/unit/LengthUnit.class
+com/app/quantitymeasurement/model/OperationType.class
+com/app/quantitymeasurement/model/QuantityMeasurementEntity.class
+com/app/quantitymeasurement/model/QuantityInputDTO.class
+com/app/quantitymeasurement/model/QuantityDTO.class
+com/app/quantitymeasurement/model/QuantityMeasurementDTO.class
+com/app/quantitymeasurement/model/QuantityModel.class
+com/app/quantitymeasurement/config/OpenAPIConfig.class
+com/app/quantitymeasurement/service/QuantityMeasurementServiceImpl.class
+com/app/quantitymeasurement/service/QuantityMeasurementService.class
+com/app/quantitymeasurement/controller/QuantityMeasurementController.class
+com/app/quantitymeasurement/exception/QuantityMeasurementException.class
+com/app/quantitymeasurement/exception/GlobalExceptionHandler.class
+com/app/quantitymeasurement/repository/QuantityMeasurementRepository.class
+application.properties
+META-INF/maven/com.app/quantity-measurement-app/pom.xml
+META-INF/maven/com.app/quantity-measurement-app/pom.properties
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ sudo systemctl list-units --type=service | grep quantity
+● quantityapp.service                            loaded failed failed  Quantity Measurement App Backend Service
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ ls /etc/systemd/system
+ chronyd.service                              iscsi.service                              snap.amazon-ssm-agent.amazon-ssm-agent.service
+ cloud-config.target.wants                    mdmonitor.service.wants                    snapd.mounts.target.wants
+ cloud-final.service.wants                    multi-user.target.wants                    sockets.target.wants
+ cloud-init.target.wants                      network-online.target.wants                ssh.service.requires
+ dbus-org.freedesktop.ModemManager1.service   open-vm-tools.service.requires             suspend-then-hibernate.target.wants
+ dbus-org.freedesktop.resolve1.service        paths.target.wants                         suspend.target.wants
+ emergency.target.wants                       quantityapp.service                        sysinit.target.wants
+ final.target.wants                           rescue.target.wants                        syslog.service
+ getty.target.wants                           sleep.target.wants                         sysstat.service.wants
+ graphical.target.wants                      'snap-amazon\x2dssm\x2dagent-13009.mount'   timers.target.wants
+ hibernate.target.wants                       snap-core22-2411.mount                     vmtoolsd.service
+ hybrid-sleep.target.wants                    snap-snapd-26865.mount
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ cat /etc/systemd/system/quantityapp.service
+[Unit]
+Description=Quantity Measurement App Backend Service
+After=network.target
+[Service]
+User=ubuntu
+Group=ubuntu
+EnvironmentFile=/etc/quantityapp/env.conf
+WorkingDirectory=/app/QuantityMeasurementApp
+ExecStart=/usr/bin/java -jar /app/QuantityMeasurementApp/target/quantity-measurement-app-0.0.1-SNAPSHOT.jar
+[Install]
+WantedBy=multi-user.target
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ cat /etc/quantityapp/env.conf
+ubuntu@ip-172-31-38-32:/app/QuantityMeasurementApp$ sudo ss -tulnp
+Netid  State    Recv-Q   Send-Q         Local Address:Port      Peer Address:Port  Process                                                  
+udp    UNCONN   0        0                 127.0.0.54:53             0.0.0.0:*      users:(("systemd-resolve",pid=378,fd=16))               
+udp    UNCONN   0        0              127.0.0.53%lo:53             0.0.0.0:*      users:(("systemd-resolve",pid=378,fd=14))               
+udp    UNCONN   0        0          172.31.38.32%ens5:68             0.0.0.0:*      users:(("systemd-network",pid=471,fd=21))               
+udp    UNCONN   0        0                  127.0.0.1:323            0.0.0.0:*      users:(("chronyd",pid=633,fd=5))                        
+udp    UNCONN   0        0                      [::1]:323               [::]:*      users:(("chronyd",pid=633,fd=6))                        
+tcp    LISTEN   0        70                 127.0.0.1:33060          0.0.0.0:*      users:(("mysqld",pid=733,fd=21))                        
+tcp    LISTEN   0        4096              127.0.0.54:53             0.0.0.0:*      users:(("systemd-resolve",pid=378,fd=17))               
+tcp    LISTEN   0        4096                 0.0.0.0:22             0.0.0.0:*      users:(("sshd",pid=1004,fd=3),("systemd",pid=1,fd=87))  
+tcp    LISTEN   0        4096           127.0.0.53%lo:53             0.0.0.0:*      users:(("systemd-resolve",pid=378,fd=15))               
+tcp    LISTEN   0        151                127.0.0.1:3306           0.0.0.0:*      users:(("mysqld",pid=733,fd=23))                        
+tcp    LISTEN   0        4096                    [::]:22                [::]:*      users:(("sshd",pid=1004,fd=4),("systemd",pid=1,fd=88))

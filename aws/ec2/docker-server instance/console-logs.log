@@ -1,0 +1,484 @@
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1012-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu May 21 05:17:05 UTC 2026
+
+  System load:  0.08               Temperature:           -273.1 C
+  Usage of /:   48.8% of 18.33GB   Processes:             119
+  Memory usage: 38%                Users logged in:       0
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.43.131
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+12 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Last login: Wed May 20 10:42:39 2026 from 13.233.177.5
+ubuntu@ip-172-31-43-131:~$ ls
+ubuntu@ip-172-31-43-131:~$ cd /
+ubuntu@ip-172-31-43-131:/$ ls
+app  bin.usr-is-merged  dev  home  lib.usr-is-merged  lost+found  mnt  proc  run   sbin.usr-is-merged  srv  tmp  var
+bin  boot               etc  lib   lib64              media       opt  root  sbin  snap                sys  usr
+ubuntu@ip-172-31-43-131:/$ docker --version
+Docker version 29.5.0, build 98f1464
+ubuntu@ip-172-31-43-131:/$ cd ~
+ubuntu@ip-172-31-43-131:~$ sudo mkdir devops-logs
+ubuntu@ip-172-31-43-131:~$ cd devops-logs/
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo touch docker-server-logs.txt
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo nano docker-server-logs.txt 
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo nano docker-server-logs.txt 
+ubuntu@ip-172-31-43-131:~/devops-logs$ pwd
+/home/ubuntu/devops-logs
+ubuntu@ip-172-31-43-131:~/devops-logs$ whoami
+ubuntu
+ubuntu@ip-172-31-43-131:~/devops-logs$ hostname
+ip-172-31-43-131
+ubuntu@ip-172-31-43-131:~/devops-logs$ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/root         19G  9.0G  9.4G  49% /
+tmpfs            954M     0  954M   0% /dev/shm
+tmpfs            382M  1.1M  381M   1% /run
+tmpfs            5.0M     0  5.0M   0% /run/lock
+efivarfs         128K  3.1K  120K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p16  881M  162M  657M  20% /boot
+/dev/nvme0n1p15  105M  6.2M   99M   6% /boot/efi
+tmpfs            191M   12K  191M   1% /run/user/1000
+ubuntu@ip-172-31-43-131:~/devops-logs$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:            1907         790         272           2        1054        1117
+Swap:              0           0           0
+ubuntu@ip-172-31-43-131:~/devops-logs$ docker ps
+CONTAINER ID   IMAGE     COMMAND               CREATED      STATUS      PORTS                                         NAMES
+6e926947a226   app-app   "java -jar app.jar"   2 days ago   Up 2 days   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   quantity-app
+ubuntu@ip-172-31-43-131:~/devops-logs$ docker images
+                                                                                                                        i Info →   U  In Use
+IMAGE                                                               ID             DISK USAGE   CONTENT SIZE   EXTRA
+474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest   be885a3efc05        454MB          115MB    U   
+app-app:latest                                                      63a29551c45b        565MB          168MB    U   
+hello-world:latest                                                  0e760fdfbc48       25.9kB         9.49kB    U   
+image-server:latest                                                 0ea255d24fbc       1.68GB          520MB        
+mysql:8                                                             c36050afdca8       1.12GB          254MB    U   
+quantity-app-multistage:latest                                      ad5b2e246b83        565MB          168MB    U   
+ubuntu@ip-172-31-43-131:~/devops-logs$ docker network ls
+NETWORK ID     NAME          DRIVER    SCOPE
+dcecbc5aeafc   app_default   bridge    local
+c76460b8ee26   bridge        bridge    local
+7182bfeabf43   host          host      local
+a01a55015003   net           bridge    local
+1f5a63a79a08   none          null      local
+ubuntu@ip-172-31-43-131:~/devops-logs$ docker volume ls
+DRIVER    VOLUME NAME
+local     236e3b8ac23af27f99d9c055435b660851635cd6838f108b7803eb5169057be8
+local     app_app-logs
+ubuntu@ip-172-31-43-131:~/devops-logs$ systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-05-18 04:43:11 UTC; 3 days ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 33967 (dockerd)
+      Tasks: 26
+     Memory: 73.4M (peak: 104.9M)
+        CPU: 1min 11.378s
+     CGroup: /system.slice/docker.service
+             ├─33967 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             ├─36970 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8081 -container-ip 172.19.0.2 -container-port 8081 -use-l>
+             └─36976 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8081 -container-ip 172.19.0.2 -container-port 8081 -use-listen>
+
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.366288028Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.660041238Z" level=info msg="sbJoin: gwep4 ''->'dbf18e0351b7', gw>
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.881845504Z" level=info msg="received task-delete event from cont>
+May 19 08:46:44 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:44.927984419Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 08:46:45 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:45.174544835Z" level=info msg="sbJoin: gwep4 ''->'c88feb9f892a', gw>
+May 19 08:46:45 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:45.279294277Z" level=info msg="received task-delete event from cont>
+May 19 09:37:03 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:03.700736947Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 09:37:03 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:03.941143636Z" level=info msg="sbJoin: gwep4 ''->'b2b9a66511a2', gw>
+May 19 09:37:04 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:04.048891773Z" level=info msg="received task-delete event from cont>
+May 20 08:13:11 ip-172-31-43-131 dockerd[33967]: time="2026-05-20T08:13:11.034805259Z" level=error msg="failed to validate image signature">
+
+ubuntu@ip-172-31-43-131:~/devops-logs$ docker info
+Client: Docker Engine - Community
+ Version:    29.5.0
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.34.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.1.3
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 5
+  Running: 1
+  Paused: 0
+  Stopped: 4
+ Images: 6
+ Server Version: 29.5.0
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 77c84241c7cbdd9b4eca2591793e3d4f4317c590
+ runc version: v1.3.5-0-g488fc13e
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.17.0-1012-aws
+ Operating System: Ubuntu 24.04.4 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.863GiB
+ Name: ip-172-31-43-131
+ ID: 5c44a580-d0b9-4083-b2a5-f497a22606c6
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+  EnableUserlandProxy: true
+  UserlandProxyPath: /usr/bin/docker-proxy
+
+ubuntu@ip-172-31-43-131:~/devops-logs$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 02:5c:c7:f6:a9:49 brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    inet 172.31.43.131/20 metric 100 brd 172.31.47.255 scope global dynamic ens5
+       valid_lft 3573sec preferred_lft 3573sec
+    inet6 fe80::5c:c7ff:fef6:a949/64 scope link 
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 82:04:65:0f:86:70 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8004:65ff:fe0f:8670/64 scope link 
+       valid_lft forever preferred_lft forever
+6: br-a01a55015003: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 8a:35:b8:2b:d9:0e brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-a01a55015003
+       valid_lft forever preferred_lft forever
+    inet6 fe80::8835:b8ff:fe2b:d90e/64 scope link 
+       valid_lft forever preferred_lft forever
+41: br-dcecbc5aeafc: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether a6:01:17:3b:b9:27 brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 brd 172.19.255.255 scope global br-dcecbc5aeafc
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a401:17ff:fe3b:b927/64 scope link 
+       valid_lft forever preferred_lft forever
+44: vethd8f3920@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-dcecbc5aeafc state UP group default 
+    link/ether de:b3:cd:f0:7b:7e brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::dcb3:cdff:fef0:7b7e/64 scope link 
+       valid_lft forever preferred_lft forever
+ubuntu@ip-172-31-43-131:~/devops-logs$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@ip-172-31-43-131:~/devops-logs$ uname -a
+Linux ip-172-31-43-131 6.17.0-1012-aws #12~24.04.1-Ubuntu SMP Mon Apr  6 17:36:28 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo systemctl enable docker
+Synchronizing state of docker.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable docker
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo systemctl start docker
+ubuntu@ip-172-31-43-131:~/devops-logs$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-05-18 04:43:11 UTC; 3 days ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 33967 (dockerd)
+      Tasks: 26
+     Memory: 74.6M (peak: 104.9M)
+        CPU: 1min 11.407s
+     CGroup: /system.slice/docker.service
+             ├─33967 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+             ├─36970 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8081 -container-ip 172.19.0.2 -container-port 8081 -use-l>
+             └─36976 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 8081 -container-ip 172.19.0.2 -container-port 8081 -use-listen>
+
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.366288028Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.660041238Z" level=info msg="sbJoin: gwep4 ''->'dbf18e0351b7', gw>
+May 19 05:05:27 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T05:05:27.881845504Z" level=info msg="received task-delete event from cont>
+May 19 08:46:44 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:44.927984419Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 08:46:45 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:45.174544835Z" level=info msg="sbJoin: gwep4 ''->'c88feb9f892a', gw>
+May 19 08:46:45 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T08:46:45.279294277Z" level=info msg="received task-delete event from cont>
+May 19 09:37:03 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:03.700736947Z" level=info msg="image pulled" digest="sha256:be885a3>
+May 19 09:37:03 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:03.941143636Z" level=info msg="sbJoin: gwep4 ''->'b2b9a66511a2', gw>
+May 19 09:37:04 ip-172-31-43-131 dockerd[33967]: time="2026-05-19T09:37:04.048891773Z" level=info msg="received task-delete event from cont>
+May 20 08:13:11 ip-172-31-43-131 dockerd[33967]: time="2026-05-20T08:13:11.034805259Z" level=error msg="failed to validate image signature">
+
+ubuntu@ip-172-31-43-131:~/devops-logs$ cd /
+ubuntu@ip-172-31-43-131:/$ ls
+app  bin.usr-is-merged  dev  home  lib.usr-is-merged  lost+found  mnt  proc  run   sbin.usr-is-merged  srv  tmp  var
+bin  boot               etc  lib   lib64              media       opt  root  sbin  snap                sys  usr
+ubuntu@ip-172-31-43-131:/$ cd app
+ubuntu@ip-172-31-43-131:/app$ ls
+Dockerfile  README.md  app.login  docker-compose.yml  mvnw  mvnw.cmd  pom.xml  src
+ubuntu@ip-172-31-43-131:/app$ docker ps -a
+CONTAINER ID   IMAGE                                                               COMMAND                  CREATED        STATUS                    PORTS                                         NAMES
+b9351607f95e   474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest   "/__cacert_entrypoin…"   44 hours ago   Exited (0) 44 hours ago                                                 quantity-app-container
+6e926947a226   app-app                                                             "java -jar app.jar"      2 days ago     Up 2 days                 0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   quantity-app
+a326571dc145   quantity-app-multistage                                             "java -jar app.jar"      5 days ago     Exited (143) 3 days ago                                                 quantity-container
+65599bfdb638   mysql:8                                                             "docker-entrypoint.s…"   6 days ago     Exited (0) 3 days ago                                                   db
+269bbfab53f4   hello-world                                                         "/hello"                 6 days ago     Exited (0) 6 days ago                                                   tender_shannon
+ubuntu@ip-172-31-43-131:/app$ cat Dockerfile
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/quantity-measurement-app-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8081
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+ubuntu@ip-172-31-43-131:/app$ cat docker-compose.yml 
+services:
+  app:
+    build: .
+
+    container_name: quantity-app
+
+    ports:
+      - "8081:8081"
+
+    restart: always
+
+    volumes:
+      - app-logs:/app/logs
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+
+volumes:
+  app-logs:
+ubuntu@ip-172-31-43-131:/app$ ls
+Dockerfile  README.md  app.login  docker-compose.yml  mvnw  mvnw.cmd  pom.xml  src
+ubuntu@ip-172-31-43-131:/app$ cd src/main/resources
+ubuntu@ip-172-31-43-131:/app/src/main/resources$ ls
+application.properties
+ubuntu@ip-172-31-43-131:/app/src/main/resources$ cat application.properties 
+spring.application.name=QuantityMeasurementApp
+server.port=8081
+
+# Repository Type Configuration either "cache" or "database"
+repository.type=database
+
+# JPA Configuration
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# MySQL Database (Development)
+spring.datasource.url=jdbc:mysql://172.31.33.159:3306/quantitydb
+spring.datasource.username=quantityadmin
+spring.datasource.password=Quantity@123
+
+spring.jpa.hibernate.ddl-auto=update
+
+# Connection Pool
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=2
+spring.datasource.hikari.connection-timeout=30000
+
+# Logging Configuration
+logging.level.root=WARN
+logging.level.com.app.quantitymeasurement=DEBUG
+logging.level.org.springframework.web=DEBUG
+logging.level.org.hibernate.SQL=DEBUG
+logging.file.name=app.login
+
+# Custom log pattern for console output to include timestamp, logger name, and message
+# The pattern includes:
+# %d{yyyy-MM-dd HH:mm:ss} - Timestamp in the format of year-month-day hour:minute:second
+# %logger{36} - Logger name truncated to 36 characters
+# %line - Line number where the log statement was issued
+# %msg%n - The log message followed by a new line
+# console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger{5}:%line] %msg%n"
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %logger{5}:%line - %msg%n
+
+# Swagger/OpenAPI
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.enabled=true
+
+# Actuator
+management.endpoints.web.exposure.include=health,metrics,info
+management.endpoint.health.show-details=always
+management.endpoint.metrics.enabled=true
+ubuntu@ip-172-31-43-131:/app/src/main/resources$ cd /app
+ubuntu@ip-172-31-43-131:/app$ ls
+Dockerfile  README.md  app.login  docker-compose.yml  mvnw  mvnw.cmd  pom.xml  src
+ubuntu@ip-172-31-43-131:/app$ cat pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/>
+  </parent>
+  
+  <groupId>com.app</groupId>
+  <artifactId>quantity-measurement-app</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>QuantityMeasurementApp</name>
+
+  <properties>
+    <java.version>21</java.version>
+    <lombok.version>1.18.26</lombok.version>
+  </properties>
+
+  <dependencies>
+
+    <!-- Web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- H2 (correct dependency) -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- MySQL -->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Swagger -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId> 
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- DevTools -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Tests -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <scope>test</scope>
+</dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <release>${java.version}</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+<plugin>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+    </plugins>
+  </build>
+
+</project>

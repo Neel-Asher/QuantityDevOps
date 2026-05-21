@@ -1,0 +1,5 @@
+cd QuantityMeasurementApp
+mvn clean package -DskipTests
+scp -o StrictHostKeyChecking=no target/quantity-measurement-app-0.0.1-SNAPSHOT.jar ubuntu@172.31.38.32:~
+ssh ubuntu@172.31.38.32 "sudo mv quantity-measurement-app-0.0.1-SNAPSHOT.jar /app/QuantityMeasurementApp/target/"
+ssh ubuntu@172.31.38.32 'sudo systemctl restart quantityapp.service'

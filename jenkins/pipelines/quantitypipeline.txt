@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Git Checkout') {
+            steps {
+                git branch: 'dev',
+                url: 'https://github.com/Neel-Asher/QuantityMeasurementSpringBoot'
+            }
+        }
+
+        stage('Build Artifact') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Copy Artifact') {
+            steps {
+                sh '''
+                scp -o StrictHostKeyChecking=no \
+                target/quantity-measurement-app-0.0.1-SNAPSHOT.jar \
+                ubuntu@172.31.38.32:/app/QuantityMeasurementApp/target
+                '''
+            }
+        }
+
+        stage('Restart Application') {
+            steps {
+                sh '''
+                ssh -o StrictHostKeyChecking=no \
+                ubuntu@172.31.38.32 \
+                "sudo systemctl restart quantityapp.service"
+                '''
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "eventVersion": "1.11",
+    "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROAW45MPOOQY6S4V5LQQ:i-099a4dbdef2b14eed",
+        "arn": "arn:aws:sts::474418738081:assumed-role/instanceRole/i-099a4dbdef2b14eed",
+        "accountId": "474418738081",
+        "accessKeyId": "ASIAW45MPOOQUO4HWZLS",
+        "sessionContext": {
+            "sessionIssuer": {
+                "type": "Role",
+                "principalId": "AROAW45MPOOQY6S4V5LQQ",
+                "arn": "arn:aws:iam::474418738081:role/instanceRole",
+                "accountId": "474418738081",
+                "userName": "instanceRole"
+            },
+            "attributes": {
+                "creationDate": "2026-05-18T08:02:31Z",
+                "mfaAuthenticated": "false"
+            },
+            "ec2RoleDelivery": "2.0"
+        },
+        "invokedBy": "ecr.amazonaws.com",
+        "inScopeOf": {
+            "issuerType": "AWS::EC2::Instance",
+            "credentialsIssuedTo": "arn:aws:ec2:ap-south-1:474418738081:instance/i-099a4dbdef2b14eed"
+        }
+    },
+    "eventTime": "2026-05-18T08:18:49Z",
+    "eventSource": "ecr.amazonaws.com",
+    "eventName": "PutImage",
+    "awsRegion": "ap-south-1",
+    "sourceIPAddress": "ecr.amazonaws.com",
+    "userAgent": "ecr.amazonaws.com",
+    "requestParameters": {
+        "registryId": "474418738081",
+        "repositoryName": "quantity-app",
+        "imageManifest": "{\n    \"mediaType\": \"application/vnd.oci.image.manifest.v1+json\",\n    \"schemaVersion\": 2,\n    \"config\": {\n        \"mediaType\": \"application/vnd.oci.image.config.v1+json\",\n        \"digest\": \"sha256:9a4b8f08bc9a694a001982d85fae36a79a6bfd52579716f97af54fa8f50cea37\",\n        \"size\": 9568\n    },\n    \"layers\": [\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:6f5c5aa4e145204b113f983c003ff8ad6489394294ef95ec030bc94e3daded54\",\n            \"size\": 41554862\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:1c24335ddd46023ff99bd665bd8ea6798464f7bbf501718edcf2eb4696e5f408\",\n            \"size\": 387\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:993d8fd138c9e57e1ee3eff48a71dab0ddbc77050f7b939ef23bd5dc993a92c5\",\n            \"size\": 20174450\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:d8d245b274e0a82f3e0957cfb0b1a4e98d07b80383903f2ba01734e3f70ea9a0\",\n            \"size\": 53123320\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:a1ec5cc057cfeb637c906fa8d51a1edb341c07fbf6e398712fb593c83a3a3dad\",\n            \"size\": 160\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:74e368405305a59e71a1fec5de6a75cc307bd663ebb9b47af045c3a5bdf30cec\",\n            \"size\": 2281\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:b6eab07b73a8c0d6700af43f3b61bb9352fa4a7e0c111f3407410c4e1f2d041a\",\n            \"size\": 93\n        },\n        {\n            \"mediaType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"digest\": \"sha256:dd9ea37724ff590aaf5354e618eccae9ae8141663a1c5ae60f959f9b1205819a\",\n            \"size\": 27294\n        }\n    ]\n}",
+        "imageManifestMediaType": "application/vnd.oci.image.manifest.v1+json",
+        "imageTag": "latest"
+    },
+    "responseElements": {
+        "image": {
+            "registryId": "474418738081",
+            "repositoryName": "quantity-app",
+            "imageId": {
+                "imageDigest": "sha256:be885a3efc05a378b55ea649219f87e67057827c677a22af6f261c0039e0ba7b",
+                "imageTag": "latest"
+            },
+            "imageManifest": "{\n    \"mediaType\": \"application/vnd.oci.image.manifest.v1+json\",\n    \"schemaVersion\": 2,\n    \"config\": {\n        \"mediaType\": \"application/vnd.oci.image.config.v1+json\",\n        \"digest\": \"sha256:9a4b8f08bc9a694a001982d85fae36a79a6bfd52579716f97af54fa8f50cea37\",\n        \"size\": 9568\n    },\n    \"layers\": [\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:6f5c5aa4e145204b113f983c003ff8ad6489394294ef95ec030bc94e3daded54\",\n            \"size\": 41554862\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:1c24335ddd46023ff99bd665bd8ea6798464f7bbf501718edcf2eb4696e5f408\",\n            \"size\": 387\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:993d8fd138c9e57e1ee3eff48a71dab0ddbc77050f7b939ef23bd5dc993a92c5\",\n            \"size\": 20174450\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:d8d245b274e0a82f3e0957cfb0b1a4e98d07b80383903f2ba01734e3f70ea9a0\",\n            \"size\": 53123320\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:a1ec5cc057cfeb637c906fa8d51a1edb341c07fbf6e398712fb593c83a3a3dad\",\n            \"size\": 160\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:74e368405305a59e71a1fec5de6a75cc307bd663ebb9b47af045c3a5bdf30cec\",\n            \"size\": 2281\n        },\n        {\n            \"mediaType\": \"application/vnd.oci.image.layer.v1.tar+gzip\",\n            \"digest\": \"sha256:b6eab07b73a8c0d6700af43f3b61bb9352fa4a7e0c111f3407410c4e1f2d041a\",\n            \"size\": 93\n        },\n        {\n            \"mediaType\": \"application/vnd.docker.image.rootfs.diff.tar.gzip\",\n            \"digest\": \"sha256:dd9ea37724ff590aaf5354e618eccae9ae8141663a1c5ae60f959f9b1205819a\",\n            \"size\": 27294\n        }\n    ]\n}",
+            "imageManifestMediaType": "application/vnd.oci.image.manifest.v1+json"
+        }
+    },
+    "requestID": "49ab1b90-cb8b-4087-91ad-eaa564f01aed",
+    "eventID": "0038670c-d847-4d2a-b570-e98634200f59",
+    "readOnly": false,
+    "resources": [
+        {
+            "accountId": "474418738081",
+            "ARN": "arn:aws:ecr:ap-south-1:474418738081:repository/quantity-app"
+        }
+    ],
+    "eventType": "AwsApiCall",
+    "managementEvent": true,
+    "recipientAccountId": "474418738081",
+    "eventCategory": "Management"
+}

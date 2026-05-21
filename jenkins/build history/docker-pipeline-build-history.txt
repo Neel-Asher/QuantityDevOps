@@ -1,0 +1,192 @@
+Started by user Neel Asher
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/quantity-app-docker-pipeline
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Git Checkout)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/quantity-app-docker-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Neel-Asher/QuantityMeasurementSpringBoot # timeout=10
+Fetching upstream changes from https://github.com/Neel-Asher/QuantityMeasurementSpringBoot
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/Neel-Asher/QuantityMeasurementSpringBoot +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 99d4a74001d269cae8d204016345deea61a71068 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 99d4a74001d269cae8d204016345deea61a71068 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D dev # timeout=10
+ > git checkout -b dev 99d4a74001d269cae8d204016345deea61a71068 # timeout=10
+Commit message: "Add Dockerfile for Maven build and JRE runtime"
+ > git rev-list --no-walk 99d4a74001d269cae8d204016345deea61a71068 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ ls -la
+total 684
+drwxr-xr-x 5 jenkins jenkins   4096 May 18 08:02 .
+drwxr-xr-x 7 jenkins jenkins   4096 May 18 06:50 ..
+drwxr-xr-x 8 jenkins jenkins   4096 May 19 09:36 .git
+-rw-r--r-- 1 jenkins jenkins     38 May 18 06:50 .gitattributes
+-rw-r--r-- 1 jenkins jenkins    394 May 18 06:50 .gitignore
+drwxr-xr-x 3 jenkins jenkins   4096 May 18 06:50 .mvn
+-rw-r--r-- 1 jenkins jenkins    297 May 18 08:02 Dockerfile
+-rw-r--r-- 1 jenkins jenkins   4920 May 18 06:50 README.md
+-rw-r--r-- 1 jenkins jenkins 630586 May 18 06:50 app.login
+-rw-r--r-- 1 jenkins jenkins  11790 May 18 06:50 mvnw
+-rw-r--r-- 1 jenkins jenkins   8481 May 18 06:50 mvnw.cmd
+-rw-r--r-- 1 jenkins jenkins   2914 May 18 06:50 pom.xml
+drwxr-xr-x 4 jenkins jenkins   4096 May 18 06:50 src
+[Pipeline] sh
++ docker build -t quantity-app .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  905.2kB
+Step 1/10 : FROM maven:3.9.6-eclipse-temurin-21 AS build
+ ---> 8d63d4c1902c
+Step 2/10 : WORKDIR /app
+ ---> Using cache
+ ---> 1ad0fd74db1d
+Step 3/10 : COPY pom.xml .
+ ---> Using cache
+ ---> 5932b5d11568
+Step 4/10 : RUN mvn dependency:go-offline
+ ---> Using cache
+ ---> d1b2a5e39ff8
+Step 5/10 : COPY src ./src
+ ---> Using cache
+ ---> d8e3488a9f7a
+Step 6/10 : RUN mvn clean package -DskipTests
+ ---> Using cache
+ ---> 6195dc142c0b
+Step 7/10 : FROM eclipse-temurin:21-jre
+ ---> 010e0a06bd4e
+Step 8/10 : WORKDIR /app
+ ---> Using cache
+ ---> 799ccd93d33e
+Step 9/10 : COPY --from=build /app/target/quantity-measurement-app-0.0.1-SNAPSHOT.jar app.jar
+ ---> Using cache
+ ---> 2440da295d5d
+Step 10/10 : EXPOSE 8081
+ ---> Using cache
+ ---> be885a3efc05
+Successfully built be885a3efc05
+Successfully tagged quantity-app:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Login to ECR)
+[Pipeline] sh
++ aws ecr get-login-password --region ap-south-1
++ docker login --username AWS --password-stdin 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app
+
+WARNING! Your credentials are stored unencrypted in '/var/lib/jenkins/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tag Image)
+[Pipeline] sh
++ docker tag quantity-app:latest 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to ECR)
+[Pipeline] sh
++ docker push 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+The push refers to repository [474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app]
+993d8fd138c9: Layer already exists
+74e368405305: Layer already exists
+a1ec5cc057cf: Layer already exists
+b6eab07b73a8: Layer already exists
+dd9ea37724ff: Layer already exists
+d8d245b274e0: Layer already exists
+6f5c5aa4e145: Layer already exists
+1c24335ddd46: Layer already exists
+latest: digest: sha256:be885a3efc05a378b55ea649219f87e67057827c677a22af6f261c0039e0ba7b size: 2048
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to EC2)
+[Pipeline] sshagent
+[ssh-agent] Using credentials jenkins
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-qgIXOT6n4sR9/agent.61901
+SSH_AGENT_PID=61904
+Running ssh-add (command line suppressed)
+Identity added: /var/lib/jenkins/workspace/quantity-app-docker-pipeline@tmp/private_key_15408134007634474816.key (ubuntu@jenkins-server)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ ssh -o StrictHostKeyChecking=no ubuntu@65.2.168.74
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1012-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Tue May 19 09:37:01 UTC 2026
+
+  System load:  0.0                Temperature:           -273.1 C
+  Usage of /:   48.8% of 18.33GB   Processes:             119
+  Memory usage: 36%                Users logged in:       0
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.43.131
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+13 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Login Succeeded
+
+WARNING! Your credentials are stored unencrypted in '/home/ubuntu/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+quantity-app-container
+quantity-app-container
+latest: Pulling from quantity-app
+Digest: sha256:be885a3efc05a378b55ea649219f87e67057827c677a22af6f261c0039e0ba7b
+Status: Image is up to date for 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+b9351607f95e1731a1198a2db3d6bfdb16b8568636e337b7a1f93212dad1e68e
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 61904 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

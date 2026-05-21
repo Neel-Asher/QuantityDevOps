@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "ap-south-1"
+        ECR_REPO = "474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app"
+        IMAGE_TAG = "latest"
+        
+        EC2_HOST = "65.2.168.74" 
+        EC2_USER = "ubuntu" 
+    }
+
+    stages {
+
+        stage('Git Checkout') {
+            steps {
+                git branch: 'dev',
+                url: 'https://github.com/Neel-Asher/QuantityMeasurementSpringBoot'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'ls -la'
+                sh 'docker build -t quantity-app .'
+            }
+        }
+
+        stage('Login to ECR') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region $AWS_REGION \
+                | docker login --username AWS --password-stdin $ECR_REPO
+                '''
+            }
+        }
+
+        stage('Tag Image') {
+            steps {
+                sh 'docker tag quantity-app:latest $ECR_REPO:$IMAGE_TAG'
+            }
+        }
+
+        stage('Push to ECR') {
+            steps {
+                sh 'docker push $ECR_REPO:$IMAGE_TAG'
+            }
+        }
+
+                stage('Deploy to EC2') {
+                    steps {
+                        sshagent(['ec2-ssh-key']) {
+                            sh '''
+                            ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} << 'EOF'
+        aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 474418738081.dkr.ecr.ap-south-1.amazonaws.com
+        docker stop quantity-app-container || true
+        docker rm quantity-app-container || true
+        docker pull 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+        docker run -d --name quantity-app-container -p 8080:8080 474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest
+        
+                            '''
+                        }
+                    }
+                }
+    }
+}

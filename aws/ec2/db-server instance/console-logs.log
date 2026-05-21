@@ -1,0 +1,322 @@
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1013-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu May 21 05:58:35 UTC 2026
+
+  System load:  0.08               Temperature:           -273.1 C
+  Usage of /:   21.0% of 13.49GB   Processes:             116
+  Memory usage: 65%                Users logged in:       0
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.33.159
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+13 updates can be applied immediately.
+1 of these updates is a standard security update.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed May 13 10:21:53 2026 from 13.233.177.4
+ubuntu@ip-172-31-33-159:~$ whoami
+ubuntu
+ubuntu@ip-172-31-33-159:~$ pwd
+/home/ubuntu
+ubuntu@ip-172-31-33-159:~$ hostname
+ip-172-31-33-159
+ubuntu@ip-172-31-33-159:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 02:0e:a1:59:68:fd brd ff:ff:ff:ff:ff:ff
+    inet 172.31.33.159/20 metric 100 brd 172.31.47.255 scope global dynamic ens5
+       valid_lft 1803sec preferred_lft 1803sec
+    inet6 fe80::e:a1ff:fe59:68fd/64 scope link 
+       valid_lft forever preferred_lft forever
+ubuntu@ip-172-31-33-159:~$ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/root         14G  2.9G   11G  21% /
+tmpfs            456M     0  456M   0% /dev/shm
+tmpfs            183M  908K  182M   1% /run
+tmpfs            5.0M     0  5.0M   0% /run/lock
+efivarfs         128K  3.3K  120K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p16  881M  162M  657M  20% /boot
+/dev/nvme0n1p15  105M  6.2M   99M   6% /boot/efi
+tmpfs             92M   12K   92M   1% /run/user/1000
+ubuntu@ip-172-31-33-159:~$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             911         747          72           2         251         164
+Swap:              0           0           0
+ubuntu@ip-172-31-33-159:~$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@ip-172-31-33-159:~$ uname -a
+Linux ip-172-31-33-159 6.17.0-1013-aws #13~24.04.1-Ubuntu SMP Fri Apr 24 21:50:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@ip-172-31-33-159:~$ mysql --version
+mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64 ((Ubuntu))
+ubuntu@ip-172-31-33-159:~$ v
+v: command not found
+ubuntu@ip-172-31-33-159:~$ sudo systemctl status mysql
+
+ubuntu@ip-172-31-33-159:~$ v
+v: command not found
+ubuntu@ip-172-31-33-159:~$ sudo ss -tulnp | grep 3306
+tcp   LISTEN 0      151               0.0.0.0:3306       0.0.0.0:*    users:(("mysqld",pid=732,fd=23))                      
+tcp   LISTEN 0      70                0.0.0.0:33060      0.0.0.0:*    users:(("mysqld",pid=732,fd=21))                      
+ubuntu@ip-172-31-33-159:~$ ps -ef | grep mysql
+your 131072x1 screen size is bogus. expect trouble
+mysql        732       1  0 May14 ?        01:02:07 /usr/sbin/mysqld
+ubuntu     53526   53464  0 06:02 pts/0    00:00:00 grep --color=auto mysql
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "SHOW DATABASES;"
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| quantitydb         |
+| sys                |
++--------------------+
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "SELECT user,host FROM mysql.user;"
++------------------+-----------+
+| user             | host      |
++------------------+-----------+
+| quantityadmin    | %         |
+| debian-sys-maint | localhost |
+| mysql.infoschema | localhost |
+| mysql.session    | localhost |
+| mysql.sys        | localhost |
+| root             | localhost |
++------------------+-----------+
+ubuntu@ip-172-31-33-159:~$ sudo ls /var/lib/mysql
+'#ib_16384_0.dblwr'   binlog.000001   binlog.000006   binlog.000011   binlog.000016   client-cert.pem   ibtmp1                 private_key.pem       sys
+'#ib_16384_1.dblwr'   binlog.000002   binlog.000007   binlog.000012   binlog.000017   client-key.pem    ip-172-31-33-159.pid   public_key.pem        undo_001
+'#innodb_redo'        binlog.000003   binlog.000008   binlog.000013   binlog.index    debian-5.7.flag   mysql                  quantitydb   undo_002
+'#innodb_temp'        binlog.000004   binlog.000009   binlog.000014   ca-key.pem      ib_buffer_pool    mysql.ibd              server-cert.pem
+ auto.cnf             binlog.000005   binlog.000010   binlog.000015   ca.pem          ibdata1           performance_schema     server-key.pem
+ubuntu@ip-172-31-33-159:~$ sudo du -sh /var/lib/mysql
+193M    /var/lib/mysql
+ubuntu@ip-172-31-33-159:~$ sudo journalctl -u mysql -n 50
+
+ubuntu@ip-172-31-33-159:~$ history
+    1  sudo apy update
+    2  sudo apt update
+    3  sudo apt install mysql-server -y
+    4  sudo systemctl status mysql
+    5  sudo mysql_secure_installation
+    6  sudo mysql
+    7  sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+    8  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+    9  sudo systemctl restart mysql
+   10  sudo systemctl status mysql
+   11  sudo systemctl restart mysql
+   12  sudo ststemctl status mysql
+   13  sudo systemctl status mysql
+   14  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+   15  sudo systemctl restart mysql
+   16  sudo systemctl status mysql
+   17  sudo ss -tulnp | grep 3306
+   18  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+   19  sudo systemctl restart mysql
+   20  sudo ss -tulnp | grep 3306
+   21  hostname -I
+   22  sudo mysql
+   23  mysql -h 172.31.33.159 -u quantityadmin -p
+   24  curl http://169.254.169.254/latest/meta-data/local-ipv4
+   25  whoami
+   26  pwd
+   27  hostname
+   28  ip a
+   29  df -h
+   30  free -m
+   31  cat /etc/os-release
+   32  uname -a
+   33  mysql --version
+   34  v
+   35  sudo systemctl status mysql
+   36  v
+   37  sudo ss -tulnp | grep 3306
+   38  ps -ef | grep mysql
+   39  sudo mysql -e "SHOW DATABASES;"
+   40  sudo mysql -e "SELECT user,host FROM mysql.user;"
+   41  sudo ls /var/lib/mysql
+   42  sudo du -sh /var/lib/mysql
+   43  sudo journalctl -u mysql -n 50
+   44  history
+ubuntu@ip-172-31-33-159:~$ sudo cat /etc/mysql/mysql.conf.d/mysqld.cnf
+#
+# The MySQL database server configuration file.
+#
+# One can use all long options that the program supports.
+# Run program with --help to get a list of available options and with
+# --print-defaults to see which it would actually understand and use.
+#
+# For explanations see
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+# Here is entries for some specific programs
+# The following values assume you have at least 32M ram
+
+[mysqld]
+#
+# * Basic Settings
+#
+user            = mysql
+# pid-file      = /var/run/mysqld/mysqld.pid
+# socket        = /var/run/mysqld/mysqld.sock
+# port          = 3306
+# datadir       = /var/lib/mysql
+
+
+# If MySQL is running as a replication slave, this should be
+# changed. Ref https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tmpdir
+# tmpdir                = /tmp
+#
+# Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+bind-address            = 0.0.0.0
+mysqlx-bind-address     = 0.0.0.0
+#
+# * Fine Tuning
+#
+key_buffer_size         = 16M
+# max_allowed_packet    = 64M
+# thread_stack          = 256K
+
+# thread_cache_size       = -1
+
+# This replaces the startup script and checks MyISAM tables if needed
+# the first time they are touched
+myisam-recover-options  = BACKUP
+
+# max_connections        = 151
+
+# table_open_cache       = 4000
+
+#
+# * Logging and Replication
+#
+# Both location gets rotated by the cronjob.
+#
+# Log all queries
+# Be aware that this log type is a performance killer.
+# general_log_file        = /var/log/mysql/query.log
+# general_log             = 1
+#
+# Error log - should be very few entries.
+#
+log_error = /var/log/mysql/error.log
+#
+# Here you can see queries with especially long duration
+# slow_query_log                = 1
+# slow_query_log_file   = /var/log/mysql/mysql-slow.log
+# long_query_time = 2
+# log-queries-not-using-indexes
+#
+# The following can be used as easy to replay backup logs or for replication.
+# note: if you are setting up a replication slave, see README.Debian about
+#       other settings you may need to change.
+# server-id             = 1
+# log_bin                       = /var/log/mysql/mysql-bin.log
+# binlog_expire_logs_seconds    = 2592000
+max_binlog_size   = 100M
+# binlog_do_db          = include_database_name
+# binlog_ignore_db      = include_database_name
+
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "USE quantitydb; SHOW TABLES;"
++-----------------------------+
+| Tables_in_quantitydb        |
++-----------------------------+
+| quantity_measurement_entity |
++-----------------------------+
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "SHOW VARIABLES LIKE 'bind_address';"
++---------------+---------+
+| Variable_name | Value   |
++---------------+---------+
+| bind_address  | 0.0.0.0 |
++---------------+---------+
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "SHOW VARIABLES LIKE 'port';"
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| port          | 3306  |
++---------------+-------+
+ubuntu@ip-172-31-33-159:~$ sudo mysql -e "SHOW VARIABLES LIKE 'datadir';"
++---------------+-----------------+
+| Variable_name | Value           |
++---------------+-----------------+
+| datadir       | /var/lib/mysql/ |
++---------------+-----------------+
+ubuntu@ip-172-31-33-159:~$ sudo systemctl is-enabled mysql
+enabled
+ubuntu@ip-172-31-33-159:~$ sudo netstat -plnt | grep mysql
+sudo: netstat: command not found
+ubuntu@ip-172-31-33-159:~$ sudo ls -lh /var/lib/mysql
+total 90M
+-rw-r----- 1 mysql mysql 192K May 21 00:00 '#ib_16384_0.dblwr'
+-rw-r----- 1 mysql mysql 8.2M May 13 05:17 '#ib_16384_1.dblwr'
+drwxr-x--- 2 mysql mysql 4.0K May 14 07:29 '#innodb_redo'
+drwxr-x--- 2 mysql mysql 4.0K May 14 07:29 '#innodb_temp'
+-rw-r----- 1 mysql mysql   56 May 13 05:17  auto.cnf
+-rw-r----- 1 mysql mysql  180 May 13 05:17  binlog.000001
+-rw-r----- 1 mysql mysql  404 May 13 05:17  binlog.000002
+-rw-r----- 1 mysql mysql 1.5K May 13 05:30  binlog.000003
+-rw-r----- 1 mysql mysql 1.9K May 13 10:17  binlog.000004
+-rw-r----- 1 mysql mysql  180 May 13 10:19  binlog.000005
+-rw-r----- 1 mysql mysql  180 May 13 10:22  binlog.000006
+-rw-r----- 1 mysql mysql  180 May 13 10:28  binlog.000007
+-rw-r----- 1 mysql mysql  180 May 13 10:33  binlog.000008
+-rw-r----- 1 mysql mysql  657 May 14 07:28  binlog.000009
+-rw-r----- 1 mysql mysql  201 May 15 00:00  binlog.000010
+-rw-r----- 1 mysql mysql 1.2K May 16 00:00  binlog.000011
+-rw-r----- 1 mysql mysql  201 May 17 00:00  binlog.000012
+-rw-r----- 1 mysql mysql  201 May 18 00:00  binlog.000013
+-rw-r----- 1 mysql mysql 1.6K May 19 00:00  binlog.000014
+-rw-r----- 1 mysql mysql  201 May 20 00:00  binlog.000015
+-rw-r----- 1 mysql mysql  201 May 21 00:00  binlog.000016
+-rw-r----- 1 mysql mysql  157 May 21 00:00  binlog.000017
+-rw-r----- 1 mysql mysql  272 May 21 00:00  binlog.index
+-rw------- 1 mysql mysql 1.7K May 13 05:17  ca-key.pem
+-rw-r--r-- 1 mysql mysql 1.1K May 13 05:17  ca.pem
+-rw-r--r-- 1 mysql mysql 1.1K May 13 05:17  client-cert.pem
+-rw------- 1 mysql mysql 1.7K May 13 05:17  client-key.pem
+-rw-r--r-- 1 root  root     0 May 13 05:17  debian-5.7.flag
+-rw-r----- 1 mysql mysql 3.4K May 14 07:28  ib_buffer_pool
+-rw-r----- 1 mysql mysql  12M May 21 00:00  ibdata1
+-rw-r----- 1 mysql mysql  12M May 14 07:29  ibtmp1
+-rw-r----- 1 mysql mysql    4 May 14 07:29  ip-172-31-33-159.pid
+drwxr-x--- 2 mysql mysql 4.0K May 13 05:17  mysql
+-rw-r----- 1 mysql mysql  25M May 18 08:33  mysql.ibd
+drwxr-x--- 2 mysql mysql 4.0K May 13 05:17  performance_schema
+-rw------- 1 mysql mysql 1.7K May 13 05:17  private_key.pem
+-rw-r--r-- 1 mysql mysql  452 May 13 05:17  public_key.pem
+drwxr-x--- 2 mysql mysql 4.0K May 13 10:04  quantitydb
+-rw-r--r-- 1 mysql mysql 1.1K May 13 05:17  server-cert.pem
+-rw------- 1 mysql mysql 1.7K May 13 05:17  server-key.pem
+drwxr-x--- 2 mysql mysql 4.0K May 13 05:17  sys
+-rw-r----- 1 mysql mysql  16M May 18 05:39  undo_001
+-rw-r----- 1 mysql mysql  16M May 18 08:33  undo_002

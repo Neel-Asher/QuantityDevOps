@@ -1,0 +1,313 @@
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1013-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu May 21 06:08:48 UTC 2026
+
+  System load:  0.0                Temperature:           -273.1 C
+  Usage of /:   42.5% of 13.49GB   Processes:             118
+  Memory usage: 54%                Users logged in:       0
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.43.195
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+12 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+Last login: Mon May 18 07:54:25 2026 from 13.233.177.5
+ubuntu@jenkins-server:~$ whoami
+ubuntu
+ubuntu@jenkins-server:~$ pwd
+/home/ubuntu
+ubuntu@jenkins-server:~$ hostname
+jenkins-server
+ubuntu@jenkins-server:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 02:4e:20:4a:a6:29 brd ff:ff:ff:ff:ff:ff
+    inet 172.31.43.195/20 metric 100 brd 172.31.47.255 scope global dynamic ens5
+       valid_lft 3036sec preferred_lft 3036sec
+    inet6 fe80::4e:20ff:fe4a:a629/64 scope link 
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 82:8b:9c:ac:b6:43 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::808b:9cff:feac:b643/64 scope link 
+       valid_lft forever preferred_lft forever
+ubuntu@jenkins-server:~$ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/root         14G  5.8G  7.8G  43% /
+tmpfs            954M     0  954M   0% /dev/shm
+tmpfs            382M  952K  381M   1% /run
+tmpfs            5.0M     0  5.0M   0% /run/lock
+efivarfs         128K  3.3K  120K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p16  881M  162M  657M  20% /boot
+/dev/nvme0n1p15  105M  6.2M   99M   6% /boot/efi
+tmpfs            191M   16K  191M   1% /run/user/1000
+ubuntu@jenkins-server:~$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:            1907        1101         277           2         735         806
+Swap:              0           0           0
+ubuntu@jenkins-server:~$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ubuntu@jenkins-server:~$ uname -a
+Linux jenkins-server 6.17.0-1013-aws #13~24.04.1-Ubuntu SMP Fri Apr 24 21:50:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ubuntu@jenkins-server:~$ java -version
+openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+ubuntu@jenkins-server:~$ jenkins -version
+Running from: /usr/share/java/jenkins.war
+webroot: /home/ubuntu/.jenkins/war
+2026-05-21 06:10:32.943+0000 [id=1]     INFO    winstone.Logger#logInternal: Beginning extraction from war file
+2026-05-21 06:10:33.954+0000 [id=1]     WARNING o.e.j.ee9.nested.ContextHandler#setContextPath: Empty contextPath
+2026-05-21 06:10:34.065+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: jetty-12.1.8; built: 2026-04-01T01:09:18.991Z; git: c9cdc9aaa434a3665b8a53b4d1cc3684992da649; jvm 21.0.10+7-Ubuntu-124.04
+2026-05-21 06:10:34.091+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStop: Stopped oejs.Server@79179359{STOPPING}[12.1.8,sto=0]
+2026-05-21 06:10:34.091+0000 [id=1]     INFO    winstone.Logger#logInternal: Jetty shutdown successfully
+java.io.IOException: Failed to start Jetty
+        at Jenkins Main ClassLoader//winstone.Launcher.<init>(Launcher.java:197)
+        at Jenkins Main ClassLoader//winstone.Launcher.main(Launcher.java:493)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at executable.Main.main(Main.java:332)
+Caused by: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:8080
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:313)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.Server.lambda$doStart$0(Server.java:617)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+        at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+        at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.Server.doStart(Server.java:613)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:92)
+        at Jenkins Main ClassLoader//winstone.Launcher.<init>(Launcher.java:193)
+        ... 4 more
+Caused by: java.net.BindException: Address already in use
+        at java.base/sun.nio.ch.Net.bind0(Native Method)
+        at java.base/sun.nio.ch.Net.bind(Net.java:577)
+        at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344)
+        at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:344)
+        ... 19 more
+2026-05-21 06:10:34.095+0000 [id=1]     SEVERE  winstone.Logger#logInternal: Container startup failed
+java.net.BindException: Address already in use
+        at java.base/sun.nio.ch.Net.bind0(Native Method)
+        at java.base/sun.nio.ch.Net.bind(Net.java:577)
+        at java.base/sun.nio.ch.ServerSocketChannelImpl.netBind(ServerSocketChannelImpl.java:344)
+        at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:301)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:344)
+Caused: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:8080
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:313)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.Server.lambda$doStart$0(Server.java:617)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+        at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+        at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+        at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.server.Server.doStart(Server.java:613)
+        at Jenkins Main ClassLoader//org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:92)
+        at Jenkins Main ClassLoader//winstone.Launcher.<init>(Launcher.java:193)
+Caused: java.io.IOException: Failed to start Jetty
+        at Jenkins Main ClassLoader//winstone.Launcher.<init>(Launcher.java:197)
+        at Jenkins Main ClassLoader//winstone.Launcher.main(Launcher.java:493)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at executable.Main.main(Main.java:332)
+ubuntu@jenkins-server:~$ sudo systemctl status jenkins
+● jenkins.service - Jenkins Continuous Integration Server
+     Loaded: loaded (/usr/lib/systemd/system/jenkins.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-05-18 08:21:01 UTC; 2 days ago
+   Main PID: 47638 (java)
+      Tasks: 48 (limit: 2209)
+     Memory: 699.6M (peak: 761.1M)
+        CPU: 23min 54.623s
+     CGroup: /system.slice/jenkins.service
+             └─47638 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkins/war --httpPort=8080
+
+May 20 08:21:06 jenkins-server jenkins[47638]: 2026-05-20 08:21:06.453+0000 [id=15255]        INFO        h.m.DownloadService$Downloadable#load: Obtained the updated data file>
+May 20 08:37:52 jenkins-server jenkins[47638]: 2026-05-20 08:37:52.639+0000 [id=28]        WARNING        o.e.j.server.LowResourceMonitor#monitor: Low Resources: Server low on>
+May 20 08:38:07 jenkins-server jenkins[47638]: 2026-05-20 08:38:07.661+0000 [id=28]        INFO        o.e.j.server.LowResourceMonitor#monitor: Low Resources cleared
+May 21 04:47:43 jenkins-server jenkins[47638]: 2026-05-21 04:47:43.222+0000 [id=17816]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: Found invalid crumb 157>
+May 21 04:47:43 jenkins-server jenkins[47638]: 2026-05-21 04:47:43.223+0000 [id=17816]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: No valid crumb was incl>
+May 21 04:49:11 jenkins-server jenkins[47638]: 2026-05-21 04:49:11.332+0000 [id=17812]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: Found invalid crumb 157>
+May 21 04:49:11 jenkins-server jenkins[47638]: 2026-05-21 04:49:11.333+0000 [id=17812]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: No valid crumb was incl>
+May 21 04:49:20 jenkins-server jenkins[47638]: 2026-05-21 04:49:20.310+0000 [id=17816]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: Found invalid crumb 157>
+May 21 04:49:20 jenkins-server jenkins[47638]: 2026-05-21 04:49:20.312+0000 [id=17816]        WARNING        hudson.security.csrf.CrumbFilter#doFilter: No valid crumb was incl>
+May 21 04:56:28 jenkins-server jenkins[47638]: 2026-05-21 04:56:28.047+0000 [id=17812]        WARNING        org.eclipse.jetty.util.HostPort#<init>: Bad Authority: [/]
+
+ubuntu@jenkins-server:~$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2026-05-18 06:30:39 UTC; 2 days ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 44090 (dockerd)
+      Tasks: 9
+     Memory: 56.5M (peak: 162.3M)
+        CPU: 35.126s
+     CGroup: /system.slice/docker.service
+             └─44090 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+May 18 08:18:04 jenkins-server dockerd[44090]: time="2026-05-18T08:18:04.024543977Z" level=info msg="image created" imageID="sha256:d8e3488a9f7aee7a4ef403bf3d5789acdab065497c5>
+May 18 08:18:04 jenkins-server dockerd[44090]: time="2026-05-18T08:18:04.341800047Z" level=info msg="sbJoin: gwep4 ''->'94065910559f', gwep6 ''->''" eid=94065910559f ep=cool_e>
+May 18 08:18:17 jenkins-server dockerd[44090]: time="2026-05-18T08:18:17.818461146Z" level=info msg="ignoring event" container=19e7ae77e5715027f72999d94c81e39e859d5ed52064729d>
+May 18 08:18:28 jenkins-server dockerd[44090]: time="2026-05-18T08:18:28.636113119Z" level=info msg="image created" imageID="sha256:6195dc142c0bc1d598898fec4ae16e82e274f7a3987>
+May 18 08:18:40 jenkins-server dockerd[44090]: time="2026-05-18T08:18:40.230691814Z" level=info msg="image pulled" digest="sha256:010e0a06bd4e0184dec58626afb3ba727b42c56c91b97>
+May 18 08:18:41 jenkins-server dockerd[44090]: time="2026-05-18T08:18:41.475091731Z" level=info msg="image created" imageID="sha256:799ccd93d33e0787b5f0a75fb8eed0d09657eb92b37>
+May 18 08:18:42 jenkins-server dockerd[44090]: time="2026-05-18T08:18:42.605256137Z" level=info msg="image created" imageID="sha256:2440da295d5d5a2b3b41acb979f1eeeb2ea6ee7e9d4>
+May 18 08:18:43 jenkins-server dockerd[44090]: time="2026-05-18T08:18:43.778119483Z" level=info msg="image created" imageID="sha256:be885a3efc05a378b55ea649219f87e67057827c677>
+May 18 08:18:43 jenkins-server dockerd[44090]: time="2026-05-18T08:18:43.845992231Z" level=info msg="image created" imageID="sha256:be885a3efc05a378b55ea649219f87e67057827c677>
+May 18 08:18:47 jenkins-server dockerd[44090]: time="2026-05-18T08:18:47.217060420Z" level=info msg="image created" imageID="sha256:be885a3efc05a378b55ea649219f87e67057827c677>
+
+ubuntu@jenkins-server:~$ docker --version
+Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2
+ubuntu@jenkins-server:~$ sudo docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@jenkins-server:~$ docker images
+                                                                                                                                                            i Info →   U  In Use
+IMAGE                                                               ID             DISK USAGE   CONTENT SIZE   EXTRA
+474418738081.dkr.ecr.ap-south-1.amazonaws.com/quantity-app:latest   be885a3efc05        454MB          115MB        
+eclipse-temurin:21-jre                                              010e0a06bd4e        459MB          120MB        
+maven:3.9.6-eclipse-temurin-21                                      8d63d4c1902c        770MB          235MB        
+quantity-app:latest                                                 be885a3efc05        454MB          115MB        
+ubuntu@jenkins-server:~$ sudo ss -tulnp | grep 8080
+tcp   LISTEN 0      50                      *:8080             *:*    users:(("java",pid=47638,fd=9))                        
+ubuntu@jenkins-server:~$ sudo ss -tulnp | grep 8081
+ubuntu@jenkins-server:~$ ls /var/lib/jenkins
+caches                         hudson.plugins.git.GitTool.xml                  jobs                                                       queue.xml.bak             users
+config.xml                     identity.key.enc                                logs                                                       secret.key                workspace
+credentials.xml                jenkins.install.InstallUtil.lastExecVersion     nodeMonitors.xml                                           secret.key.not-so-secret
+fingerprints                   jenkins.install.UpgradeWizard.state             org.jenkinsci.plugins.workflow.flow.FlowExecutionList.xml  secrets
+hello.txt                      jenkins.model.JenkinsLocationConfiguration.xml  plugins                                                    updates
+hudson.model.UpdateCenter.xml  jenkins.telemetry.Correlator.xml                queue.xml                                                  userContent
+ubuntu@jenkins-server:~$ ls /var/lib/jenkins/workspace
+quantity-app-docker-pipeline  quantity-app-docker-pipeline@tmp  quantitymeasurementapp  quantitypipeline  quantitypipeline@tmp
+ubuntu@jenkins-server:~$ history | tail -100
+    1  whoami
+    2  sudo apt update && sudo apt upgrade -y
+    3  sudo apt install openjdk-21-jdk -y
+    4  java --version
+    5  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    6  echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+    7  sudo systemctl status jenkins
+    8  sudo apt update
+    9  sudo apt install jenkins
+   10  sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc   https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+   11  echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]"   https://pkg.jenkins.io/debian-stable binary/ | sudo tee   /etc/apt/sources.list.d/jenkins.list > /dev/null
+   12  sudo apt update
+   13  sudo apt install jenkins
+   14  sudo systemctl status jenkins
+   15  sudo systemctl enable jenkins
+   16  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   17  sudo hostnamectl set-hostname jenkins-server
+   18  hostname
+   19  sudo apt install maven -y
+   20  mvn --version
+   21  sudo su - jenkins
+   22  whoami
+   23  sudo apt update -y
+   24  sudo apt install awscli -y
+   25  sudo apt install unzip curl -y
+   26  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   27  unzip awscliv2.zip
+   28  sudo ./aws/install
+   29  aws --version
+   30  aws sts get-caller-identity
+   31  sudo apt update -y
+   32  sudo apt install docker.io -y
+   33  sudo systemctl start docker
+   34  sudo systemctl enable docker
+   35  sudo usermod -aG docker ubuntu
+   36  newgrp docker
+   37  docker --version
+   38  docker ps
+   39  aws ecr get-login-password --region ap-south-1
+   40  aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 474418738081.dkr.ecr.ap-south-1.amazonaws.com
+   41  docker ps
+   42  whoami
+   43  cd /
+   44  ls
+   45  cd /app
+   46  git clone -b dev https://github.com/Neel-Asher/QuantityMeasurementSpringBoot.git
+   47  sudo git clone -b dev https://github.com/Neel-Asher/QuantityMeasurementSpringBoot.git
+   48  ls QuantityMeasurementSpringBoot/
+   49  sudo chown -R ubuntu:ubuntu QuantityMeasurementSpringBoot
+   50  ls -l QuantityMeasurementSpringBoot
+   51  find . -name Dockerfile
+   52  sudo find . -name Dockerfile
+   53  ls /app
+   54  ls /var/lib/jenkins/workspace
+   55  ls -la /var/lib/jenkins/workspace/quantity-app-docker-pipeline
+   56  git ls-tree -r origin/dev --name-only | grep Dockerfile
+   57  docker --version
+   58  docker-compose --version
+   59  aws configure
+   60  sudo usermod -aG docker jenkins
+   61  sudo systemctl restart jenkins
+   62  ssh-keygen -t rsa -b 4096 -f ~/.ssh/jenkins_ec2_key
+   63  cat ~/.ssh/jenkins_ec2_key.pub
+   64  cat ~/.ssh/jenkins_ec2_key
+   65  docker ps
+   66  docker images
+   67  whoami
+   68  pwd
+   69  hostname
+   70  ip a
+   71  df -h
+   72  free -m
+   73  cat /etc/os-release
+   74  uname -a
+   75  java -version
+   76  jenkins -version
+   77  sudo systemctl status jenkins
+   78  sudo systemctl status docker
+   79  docker --version
+   80  sudo docker ps
+   81  docker images
+   82  sudo ss -tulnp | grep 8080
+   83  sudo ss -tulnp | grep 8081
+   84  ls /var/lib/jenkins
+   85  ls /var/lib/jenkins/workspace
+   86  history | tail -100
